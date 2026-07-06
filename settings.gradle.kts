@@ -24,4 +24,18 @@ dependencyResolutionManagement {
 
 rootProject.name = "iOSWeatherAppClone"
 include(":app")
+include(":core:model")
+include(":core:network")
+include(":core:database")
+include(":core:datastore")
+include(":core:location")
+include(":core:navigation")
+include(":core:designsystem")
+include(":core:testing")
+include(":feature:weather")
+include(":feature:locations")
+include(":feature:maps")
+include(":feature:alerts")
+include(":feature:settings")
+include(":feature:widgets")
  
