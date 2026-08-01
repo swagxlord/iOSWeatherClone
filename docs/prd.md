@@ -172,7 +172,6 @@ Use a modular architecture with MVI-style presentation layers:
 :feature:weather
 :feature:locations
 :feature:maps
-:feature:alerts
 :feature:settings
 :feature:widgets
 ```
@@ -220,13 +219,19 @@ Weather Detail
 └── Weather Map
 ```
 
-The three primary user-facing destinations are:
+Weather Detail is the app's main screen and default route. Locations List and Weather Map are full-screen departures from Weather Detail, not persistent peer tabs.
 
-1. Weather Detail
-2. Locations List
-3. Weather Map
+The Weather Detail screen owns the bottom navigation control. The bottom navigation should disappear when the user opens Locations List, Weather Map, or any secondary flow.
 
-Additional route keys may exist for addressability and Android platform entry points, but they should be treated as secondary flows rather than permanent top-level navigation items.
+The Weather Detail bottom navigation should include:
+
+1. A Weather Map button.
+2. A location carousel indicator.
+3. A Locations button.
+
+The location carousel should show the first location as the user's current location and show trailing dots for saved locations. When the user moves to a different saved location, the highlighted carousel item should update to match the selected location.
+
+Additional route keys may exist for addressability and Android platform entry points, but they should be treated as full-screen departures, secondary flows, or platform flows rather than permanent top-level navigation items.
 
 Navigation should be modeled with:
 
@@ -244,7 +249,6 @@ sealed interface AppRoute {
     data object Locations : AppRoute
     data object LocationSearch : AppRoute
     data object WeatherMap : AppRoute
-    data class AlertDetail(val alertId: String) : AppRoute
     data object Settings : AppRoute
     data object WidgetConfiguration : AppRoute
 }
@@ -252,11 +256,10 @@ sealed interface AppRoute {
 
 Route roles:
 
-* `WeatherDetail` is the default destination and shows the selected location forecast.
-* `Locations` is the saved/current locations list and owns the overflow menu for edit list, notifications, units, and report issue actions.
-* `WeatherMap` is the full-screen weather map/radar experience.
+* `WeatherDetail` is the default destination, shows the selected location forecast, and owns the bottom navigation control.
+* `Locations` is a full-screen departure from Weather Detail. It shows the saved/current locations list and owns the overflow menu for edit list, notifications, units, and report issue actions.
+* `WeatherMap` is a full-screen departure from Weather Detail and shows the map/radar experience.
 * `LocationSearch` is opened from the Locations search affordance.
-* `AlertDetail` is opened from alert banners/cards.
 * `Settings` is opened from the Locations overflow/options menu.
 * `WidgetConfiguration` is an Android widget setup route and not part of normal app browsing. It may be opened by Android widget configuration intents.
 
@@ -377,24 +380,7 @@ Future map layers:
 * Wind
 * Air quality
 
-### 7.5 Alert Detail Screen
-
-Shows severe weather alert details.
-
-Fields:
-
-* Alert title
-* Event type
-* Severity
-* Urgency
-* Certainty
-* Source
-* Effective time
-* Expiration time
-* Description
-* Instructions
-
-### 7.6 Settings Screen
+### 7.5 Settings Screen
 
 Settings:
 
@@ -411,7 +397,7 @@ Settings:
 * Rain starting/stopping notifications
 * Widget location preference
 
-### 7.7 Widget Configuration Screen
+### 7.6 Widget Configuration Screen
 
 Allows the user to pick which location a widget should display.
 
@@ -972,10 +958,9 @@ Default behavior:
 
 * Tapping the main widget body opens `WeatherDetail` for the widget's configured location.
 * Tapping a radar/map affordance, when present on medium or large widgets, opens `WeatherMap`.
-* Tapping an alert affordance, when present, opens `AlertDetail` for that alert.
 * Widget configuration opens `WidgetConfiguration` and is separate from normal app browsing.
 
-Widget intents should carry only stable route inputs, such as route type, location ID, and alert ID. The app shell maps those inputs into the Navigation 3 route graph.
+Widget intents should carry only stable route inputs, such as route type and location ID. The app shell maps those inputs into the Navigation 3 route graph.
 
 ## 15. UI/UX Requirements
 

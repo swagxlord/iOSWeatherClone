@@ -19,9 +19,6 @@ sealed interface AppRoute : NavKey {
     data object WeatherMap : AppRoute
 
     @Serializable
-    data class AlertDetail(val alertId: String) : AppRoute
-
-    @Serializable
     data object Settings : AppRoute
 
     @Serializable

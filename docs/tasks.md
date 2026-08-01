@@ -7,7 +7,7 @@ This tracker is derived from [docs/prd.md](prd.md). Keep the PRD as the source o
 Phase 1 starts with a fake-data vertical slice:
 
 - [x] Create project/module structure for core domain and weather feature work.
-- [x] Add Navigation 3 app route keys and a three-primary-destination navigation host.
+- [x] Add Navigation 3 app route keys and a Weather-root navigation host.
 - [ ] Add app-owned weather domain models.
 - [ ] Add a fake weather repository.
 - [ ] Add MVI contracts for weather screen state, intents, and effects.
@@ -18,7 +18,7 @@ Phase 1 starts with a fake-data vertical slice:
 ## Phase 1: Core Forecast App
 
 - [x] Project/module setup.
-- [x] Navigation 3 setup with app-owned route keys, saved back stack, and primary flows for Weather Detail, Locations, and Weather Map.
+- [x] Navigation 3 setup with app-owned route keys, saved back stack, and Weather Detail as the app root.
 - [ ] Open-Meteo Forecast API integration.
 - [ ] WeatherRepository interface and implementation.
 - [ ] Current weather header.
@@ -34,7 +34,7 @@ Phase 1 starts with a fake-data vertical slice:
 
 ## Navigation Shape
 
-The app should be organized around three primary destinations:
+The app should be organized around Weather Detail as the main/root destination:
 
 ```text
 Weather Detail
@@ -47,10 +47,13 @@ Weather Detail
 
 Secondary routes should exist only where they are opened from a primary screen or Android platform entry point:
 
+- `Locations` opens as a full-screen departure from Weather Detail.
+- `WeatherMap` opens as a full-screen departure from Weather Detail.
 - `LocationSearch` opens from the Locations search affordance.
-- `AlertDetail` opens from weather alert banners/cards.
 - `Settings` opens from the Locations overflow menu.
 - `WidgetConfiguration` is reserved for Android widget setup.
+
+The Weather Detail bottom navigation should show only on Weather Detail and should include a Weather Map button, a current/saved-location carousel indicator, and a Locations button.
 
 ## Phase 2: Visual Polish
 

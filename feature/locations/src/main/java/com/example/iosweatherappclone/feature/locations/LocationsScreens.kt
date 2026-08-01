@@ -30,11 +30,13 @@ fun LocationsScreen(
 @Composable
 fun LocationSearchScreen(
     onLocationSelected: () -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     DestinationLayout("Location Search", modifier) {
         Text("Search and saved-city results will appear here.")
         Button(onClick = onLocationSelected) { Text("Select sample location") }
+        OutlinedButton(onClick = onBack) { Text("Back") }
     }
 }
 
