@@ -28,4 +28,7 @@ dependencies {
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.kotlinx.serialization.json)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.ktor.client.mock)
 }
