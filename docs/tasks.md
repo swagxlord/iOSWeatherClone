@@ -73,7 +73,6 @@ The Weather Detail bottom navigation should show only on Weather Detail and shou
 - [ ] Moon phase calculation.
 - [ ] Better precipitation timeline.
 - [ ] NWS severe alerts.
-- [ ] Alert detail screen.
 
 ## Phase 4: Weather Maps
 
