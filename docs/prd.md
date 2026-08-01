@@ -258,7 +258,7 @@ Route roles:
 * `LocationSearch` is opened from the Locations search affordance.
 * `AlertDetail` is opened from alert banners/cards.
 * `Settings` is opened from the Locations overflow/options menu.
-* `WidgetConfiguration` is an Android widget setup route and not part of normal app browsing.
+* `WidgetConfiguration` is an Android widget setup route and not part of normal app browsing. It may be opened by Android widget configuration intents.
 
 ### 6.3 Repository Rule
 
@@ -964,6 +964,19 @@ If cache is stale:
 * Show stale state gracefully.
 * Never block widget rendering on a network request.
 
+### 14.3 Widget Deep Linking
+
+Widgets should deep link into the app when tapped.
+
+Default behavior:
+
+* Tapping the main widget body opens `WeatherDetail` for the widget's configured location.
+* Tapping a radar/map affordance, when present on medium or large widgets, opens `WeatherMap`.
+* Tapping an alert affordance, when present, opens `AlertDetail` for that alert.
+* Widget configuration opens `WidgetConfiguration` and is separate from normal app browsing.
+
+Widget intents should carry only stable route inputs, such as route type, location ID, and alert ID. The app shell maps those inputs into the Navigation 3 route graph.
+
 ## 15. UI/UX Requirements
 
 ### 15.1 Visual Style
@@ -1220,6 +1233,7 @@ Acceptance criteria:
 * User can place a widget on the home screen.
 * Widget displays cached weather.
 * Widget updates after weather refresh.
+* Tapping a widget opens the app to the relevant weather destination for the widget content.
 
 ### Phase 6: Optional Advanced Features
 

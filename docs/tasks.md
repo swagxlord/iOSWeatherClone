@@ -7,7 +7,7 @@ This tracker is derived from [docs/prd.md](prd.md). Keep the PRD as the source o
 Phase 1 starts with a fake-data vertical slice:
 
 - [x] Create project/module structure for core domain and weather feature work.
-- [ ] Add Navigation 3 app route keys and a three-primary-destination navigation host.
+- [x] Add Navigation 3 app route keys and a three-primary-destination navigation host.
 - [ ] Add app-owned weather domain models.
 - [ ] Add a fake weather repository.
 - [ ] Add MVI contracts for weather screen state, intents, and effects.
@@ -18,7 +18,7 @@ Phase 1 starts with a fake-data vertical slice:
 ## Phase 1: Core Forecast App
 
 - [x] Project/module setup.
-- [ ] Navigation 3 setup with app-owned route keys, saved back stack, and primary flows for Weather Detail, Locations, and Weather Map.
+- [x] Navigation 3 setup with app-owned route keys, saved back stack, and primary flows for Weather Detail, Locations, and Weather Map.
 - [ ] Open-Meteo Forecast API integration.
 - [ ] WeatherRepository interface and implementation.
 - [ ] Current weather header.
