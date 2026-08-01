@@ -209,6 +209,25 @@ Presentation code should follow unidirectional data flow:
 
 Use Navigation 3 as the app navigation foundation.
 
+The app should feel like a three-screen weather experience, matching the iOS Weather interaction model:
+
+```text
+Weather Detail
+├── Locations List
+│   ├── Location Search
+│   ├── Edit List
+│   └── Settings/options menu
+└── Weather Map
+```
+
+The three primary user-facing destinations are:
+
+1. Weather Detail
+2. Locations List
+3. Weather Map
+
+Additional route keys may exist for addressability and Android platform entry points, but they should be treated as secondary flows rather than permanent top-level navigation items.
+
 Navigation should be modeled with:
 
 * App-owned route keys for each screen.
@@ -230,6 +249,16 @@ sealed interface AppRoute {
     data object WidgetConfiguration : AppRoute
 }
 ```
+
+Route roles:
+
+* `WeatherDetail` is the default destination and shows the selected location forecast.
+* `Locations` is the saved/current locations list and owns the overflow menu for edit list, notifications, units, and report issue actions.
+* `WeatherMap` is the full-screen weather map/radar experience.
+* `LocationSearch` is opened from the Locations search affordance.
+* `AlertDetail` is opened from alert banners/cards.
+* `Settings` is opened from the Locations overflow/options menu.
+* `WidgetConfiguration` is an Android widget setup route and not part of normal app browsing.
 
 ### 6.3 Repository Rule
 

@@ -6,8 +6,8 @@ This tracker is derived from [docs/prd.md](prd.md). Keep the PRD as the source o
 
 Phase 1 starts with a fake-data vertical slice:
 
-- [ ] Create project/module structure for core domain and weather feature work.
-- [ ] Add Navigation 3 app route keys and navigation host foundation.
+- [x] Create project/module structure for core domain and weather feature work.
+- [ ] Add Navigation 3 app route keys and a three-primary-destination navigation host.
 - [ ] Add app-owned weather domain models.
 - [ ] Add a fake weather repository.
 - [ ] Add MVI contracts for weather screen state, intents, and effects.
@@ -17,8 +17,8 @@ Phase 1 starts with a fake-data vertical slice:
 
 ## Phase 1: Core Forecast App
 
-- [ ] Project/module setup.
-- [ ] Navigation 3 setup with app-owned route keys and back stack.
+- [x] Project/module setup.
+- [ ] Navigation 3 setup with app-owned route keys, saved back stack, and primary flows for Weather Detail, Locations, and Weather Map.
 - [ ] Open-Meteo Forecast API integration.
 - [ ] WeatherRepository interface and implementation.
 - [ ] Current weather header.
@@ -31,6 +31,26 @@ Phase 1 starts with a fake-data vertical slice:
 - [ ] Pull to refresh.
 - [ ] Loading/error states.
 - [ ] Local weather cache.
+
+## Navigation Shape
+
+The app should be organized around three primary destinations:
+
+```text
+Weather Detail
+├── Locations List
+│   ├── Location Search
+│   ├── Edit List
+│   └── Settings/options menu
+└── Weather Map
+```
+
+Secondary routes should exist only where they are opened from a primary screen or Android platform entry point:
+
+- `LocationSearch` opens from the Locations search affordance.
+- `AlertDetail` opens from weather alert banners/cards.
+- `Settings` opens from the Locations overflow menu.
+- `WidgetConfiguration` is reserved for Android widget setup.
 
 ## Phase 2: Visual Polish
 
