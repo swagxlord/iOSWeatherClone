@@ -13,6 +13,7 @@ Phase 1 starts with a fake-data vertical slice:
 - [ ] Add MVI contracts for weather screen state, intents, and effects.
 - [ ] Build the first Weather Detail screen in Jetpack Compose.
 - [ ] Render current conditions, hourly forecast, 10-day forecast, and weather detail cards.
+- [ ] Review the Weather Detail Compose implementation for component boundaries, state hoisting, accessibility, performance, and visual fidelity; then add loading placeholders and animated value transitions into loaded weather values.
 - [ ] Keep provider DTOs out of UI-facing models.
 
 ## Phase 1: Core Forecast App
@@ -30,6 +31,7 @@ Phase 1 starts with a fake-data vertical slice:
 - [ ] Room/DataStore persistence.
 - [ ] Pull to refresh.
 - [ ] Loading/error states.
+- [ ] Animate weather values from loading/current values to newly loaded values, with cancellation and reduced-motion support.
 - [ ] Local weather cache.
 
 ## Navigation Shape
@@ -64,6 +66,7 @@ The Weather Detail bottom navigation should show only on Weather Detail and shou
 - [ ] Better empty/error states.
 - [ ] Unit settings.
 - [ ] Smooth card animations.
+- [ ] Review condition-background animation performance and accessibility on a physical device.
 
 ## Phase 3: Expanded Weather Data
 

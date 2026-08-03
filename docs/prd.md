@@ -314,6 +314,45 @@ The screen should support:
 * Tap cards to open detail screens
 * Dynamic background based on weather condition and day/night
 
+#### 7.1.1 Visual and Composition Requirements
+
+The Weather Detail screen should use an immersive, vertically scrolling Compose layout inspired by the supplied visual references while retaining original Android implementation details and assets.
+
+The screen should:
+
+* Place current location, temperature, condition, and daily high/low values in a centered header above the forecast content.
+* Render the hourly forecast as a horizontally scrolling row containing time, condition icon, precipitation probability when applicable, and temperature.
+* Render the 10-day forecast as a card containing day, condition icon, precipitation probability, low/high temperatures, and a normalized temperature-range bar.
+* Present detail metrics in reusable rounded cards. Initial metrics include feels like, UV index, wind and gusts, sunrise/sunset, precipitation, visibility, humidity/dew point, pressure, averages, air quality, and moon phase.
+* Support full-width cards for content that needs more space, including alerts, air quality, wind, precipitation radar, and issue reporting.
+* Keep cards legible over the weather scene using translucent dark surfaces, consistent spacing, rounded corners, primary/secondary text hierarchy, and accessible contrast.
+* Use app-owned Compose or vector graphics for condition icons, charts, gauges, and decorative weather elements rather than Apple-owned assets.
+* Allow sections to be omitted when their backing data is unavailable without leaving empty cards or broken spacing.
+* Provide Compose previews for the complete screen, the current-conditions header/background, and reusable forecast/card groups using representative fake data.
+
+#### 7.1.2 Condition-Driven Background
+
+The current-conditions header and screen background should visually respond to both `WeatherCondition` and day/night state.
+
+* Cloudy nighttime conditions should use a dark sky with layered clouds that drift and subtly change opacity.
+* Clear, cloudy, rain, snow, fog, and thunderstorm states should each be capable of supplying a distinct palette and animation treatment.
+* Background motion should loop without a visible jump and must not block scrolling or user interaction.
+* Animation work should avoid excessive allocations during frames and should remain smooth on supported devices.
+* The background must provide a static representative frame in Compose Preview and when system animation duration is disabled.
+* Motion should be subtle enough to preserve text readability and should honor the user's reduced-motion or disabled-animation preference.
+
+#### 7.1.3 Loading and Value Transitions
+
+Weather data loading should have an intentional visual transition rather than abruptly replacing blank content with final values.
+
+* The screen state should explicitly distinguish initial loading, refreshing with existing data, loaded, stale/offline, and error states.
+* During initial loading, the layout should preserve the final card geometry with restrained placeholders or skeleton content to avoid layout jumps.
+* When data becomes available, primary numeric values such as current temperature, forecast temperatures, percentages, wind, pressure, and air-quality index should animate from their displayed or placeholder value to the new value.
+* Numeric value animation should be short, cancellable, and restart from the currently displayed value when fresher data arrives.
+* Text labels, units, and accessibility semantics must expose the final value and must not announce every intermediate animation frame.
+* Refreshing existing data should keep the prior values visible and use a lightweight refresh indication instead of reverting the whole screen to placeholders.
+* Loading and value animations should honor disabled system animations/reduced motion and immediately show the final values in that mode.
+
 ### 7.2 Locations Screen
 
 Shows current location and saved locations.
